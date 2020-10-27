@@ -1,0 +1,21 @@
+<?php
+/* @var $block \Dholi\Widgets\Block\Widget\Carousel */
+$items = $block->getItensCollection();
+$total = $block->getData('total');
+$loadingImg = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
+?>
+<div class="block widget widget-banner widget-banner-<?= $total ?>">
+	<?php foreach ($items as $item):?>
+		<div class="item banner">
+			<a href="<?php echo $item->getUrl() ?>" target="<?php echo $item->getTargetUrl() ?>">
+				<div class="image overlay">
+					<img src="<?php echo $loadingImg ?>" data-src="<?php echo $block->getItemImageUrl($item) ?>" class="lazy"/>
+				</div>
+				<div class="container">
+						<h2><?php echo $item->getTitle() ?></h2>
+						<p><span class="description"><?php echo $item->getDescription() ?></span></p>
+				</div>
+			</a>
+		</div>
+	<?php endforeach ?>
+</div>

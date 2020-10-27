@@ -1,0 +1,52 @@
+<?php
+/* @var $block \Dholi\Widgets\Block\Widget\ProductsByCategory */
+$items = $block->getItems();
+if ($exist = ($items && $items->getSize())) {
+	$alias = 'widget-products-' . $this->getAlias();
+	$templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+}
+$classCount = 0;
+$classItem = null;
+$classData = array(0 => 'masonry-item', 1 => 'masonry-item masonry-item__height2', 2 => 'masonry-item masonry-item__height3', 3 => 'masonry-item masonry-item__height4', 4 => 'masonry-item masonry-item__height5');
+?>
+<?php if ($exist) : ?>
+	<div class="block widget masonry-widget">
+		<div class="block-title">
+			<strong role="heading" aria-level="2"><?= $block->escapeHtml($block->getTitle()) ?></strong>
+		</div>
+		<div class="block-content">
+			<div id="<?php echo $alias ?>" class="products-grid grid masonry" data-masonry='{ "itemSelector": ".masonry-item", "percentPosition": true }'>
+				<?php foreach ($items as $_item): ?>
+					<?php
+					$classCount = ($classCount > 4 ? 0 : $classCount);
+					$classItem = $classData[$classCount];
+					$classCount++;
+					?>
+					<div class="<?php echo $classItem ?>">
+						<div class="product-item-info">
+							<a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
+							   class="product-item-photo">
+								<?= $block->getImage($_item, 'category_page_grid')->toHtml() ?>
+							</a>
+							<div class="product-item-details">
+								<strong class="product-item-name">
+									<a title="<?= $block->escapeHtml($_item->getName()) ?>"
+									   href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
+									   class="product-item-link">
+										<?= $block->escapeHtml($_item->getName()) ?>
+									</a>
+								</strong>
+
+								<?= $block->getProductPrice($_item); ?>
+
+								<?php if ($templateType) : ?>
+									<?= $block->getReviewsSummaryHtml($_item, $templateType); ?>
+								<?php endif; ?>
+							</div>
+						</div>
+					</div>
+				<?php endforeach ?>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>
