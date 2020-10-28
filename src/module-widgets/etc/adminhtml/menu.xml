@@ -5,7 +5,7 @@
 		     title="Slider"
 		     module="Dholi_Widgets"
 		     action="dholiwidgets/slider/index"
-		     parent="Dholi_Core::Menu"
+		     parent="Dholi_Core::menu"
 		     resource="Magento_Backend::content"
 		     sortOrder="0"/>
 
