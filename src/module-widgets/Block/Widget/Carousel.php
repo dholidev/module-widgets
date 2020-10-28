@@ -23,13 +23,9 @@ use Magento\Widget\Block\BlockInterface;
 
 class Carousel extends AbstractSlider implements BlockInterface {
 
-	private $imageFactory;
-
 	private $sliderHtmlId;
 
 	private $sliderHtmlIdWrapper;
-
-	private $loadingImg = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
 
 	public function __construct(Context $context,
 	                            SliderFactory $sliderFactory,
@@ -91,7 +87,7 @@ class Carousel extends AbstractSlider implements BlockInterface {
 			$imgUrl = $this->getItemImageUrl($item);
 
 			$html .= "<div class='item overlay' style='{$bannerStyle}'>
-				<img class='bg-image lazy' src='{$this->loadingImg}' data-src='{$imgUrl}'/>
+				<img class='bg-image' src='{$imgUrl}' loading='lazy'/>
 				<a href='{$item->getUrl()}' target='{$item->getTargetUrl()}'>
 					<div class='container-fluid'>
 						<div class='row'>
